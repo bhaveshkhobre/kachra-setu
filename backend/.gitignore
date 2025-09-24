@@ -1,0 +1,4 @@
+# ignore .env which contains api keys
+*.env
+*.html
+backend-py/__pycache__
