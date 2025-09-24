@@ -4,7 +4,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 import uvicorn
-import google.generativeai as genai
+try:
+    import google.generativeai as genai
+except ModuleNotFoundError:
+    genai = None
+    print("google.generativeai not installed. Install with: pip install google-generative-ai")
 import os
 from dotenv import load_dotenv
 
@@ -112,17 +116,13 @@ async def health_check():
         "model": current_model
     }
 
-# if __name__ == "__main__":
-#     print("Starting Gemini Chat API with FastAPI...")
-#     print("Endpoints:")
-#     print("  GET  / - Home")
-#     print("  POST /chat - Send message")
-#     print("  GET  /models - Get models") 
-#     print("  GET  /health - Health check")
-#     print("  GET  /docs - API documentation")
-    
-<<<<<<< HEAD:chatbot.py
-#     uvicorn.run(app, host="127.0.0.1", port=8000)
-=======
-    uvicorn.run(app, host="127.0.0.0", port=8001)
->>>>>>> 4aa067a3e42dd23114db2d65b281a8c350c77c75:backend-py/services/chatbot.py
+if __name__ == "__main__":
+    print("Starting Gemini Chat API with FastAPI...")
+    print("Endpoints:")
+    print("  GET  / - Home")
+    print("  POST /chat - Send message")
+    print("  GET  /models - Get models")
+    print("  GET  /health - Health check")
+    print("  GET  /docs - API documentation")
+
+    uvicorn.run(app, host="127.0.0.1", port=8000)

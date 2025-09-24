@@ -4,7 +4,11 @@ from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 from typing import List
 import uvicorn
-import google.generativeai as genai
+try:
+    import google.generativeai as genai
+except ModuleNotFoundError:
+    genai = None
+    print("google.generativeai not installed. Install with: pip install google-generative-ai")
 import openrouteservice as ors
 import folium
 import os
